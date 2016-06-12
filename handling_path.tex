@@ -1,6 +1,6 @@
 \section{Handling the path}
 
-The most important factor in developing a processing package is handling the path. In each step of programming, we need to know, where we are, and where we want to be (in terms of computer path). Where is the input data and where we need to print out the output data. We accept the following axioms:
+The most important factor in developing a processing package is handling the path. In each step of programming, we need to know, where we are, where we want to be (in terms of computer path), where the input data is and where we need to print the output data. We accept the following axioms:
 
 \begin{itemize}
   \item We can run any program, script, and function in the memory, if we know the location of the program.
@@ -9,7 +9,7 @@ The most important factor in developing a processing package is handling the pat
 \end{itemize}
 
 \noindent
-Since we run the \textbf{run.sh}, the program has access to the current path (using \texttt{pwd}). So we can navigate to other folders (since we know the folder names) through combining the folder name with the current path. 
+Since we run the \textbf{run.sh}, the program has access to the current path (using \texttt{pwd}). Then we can navigate to other folders (since we know the folder names) through combining the folder name with the current path. 
 
 \begin{figure} [ht]
 \centering
@@ -18,3 +18,5 @@ Since we run the \textbf{run.sh}, the program has access to the current path (us
 \label{fig:structure}
 \end{figure}
 
+\noindent
+In the next section, we develop a data processing package in six easy steps. The main subject of the following example is understanding how to handle the input and output data and learning how to work with path. The files of the example package are attached to this document. However, it is strongly recommended to generate the files step by step to learn developing and testing a data processing package for other projects.

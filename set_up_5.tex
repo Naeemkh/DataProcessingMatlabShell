@@ -1,7 +1,7 @@
 \textbf{Step 5:} Modifying the  \texttt{average\_grade.sh} script to read all data in the \texttt{input\_files} folder \\
 \\
 \noindent
-In simple programs, the \texttt{run.sh} file, commonly run another script in the \texttt{Functions\_scripts} folder, however, it is good to have it, since it can decrease the complexity for user. If you set up the \texttt{run.sh} properly, the user will only need to execute the run.sh file, without getting too much involve in details about the program. For this project the \texttt{run.sh} file is according below:\\
+In simple programs, the \texttt{run.sh} file, commonly runs another script in the \texttt{Functions\_scripts} folder, however, it is good to have it, since it can decrease the complexity for user. If you set up the \texttt{run.sh} properly, the user will only need to execute the run.sh file, without getting too much involve in details about the program. For this project the \texttt{run.sh} file is according below:\\
 
  \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
  \begin{singlespace}
@@ -37,7 +37,7 @@ cd \texttt{Functions\_scripts}\\
  \end{singlespace}
 \end{mdframed}
 \noindent
-We set up the \texttt{run.sh} file. You can put as much as details about the program (as comments) at this file. Now we need to modify the \texttt{average\_grade.sh} script. The file should be able to run all the input files (based on a special pattern) from the \texttt{Input\_files} folder and process them. In this project we assume all input files are \texttt{.txt} files. Here is the modified version of the \texttt{average\_grade.sh} script.
+We set up the \texttt{run.sh} file. You can put as many details about the program (as comments) in this file, as you want. Now we need to modify the \texttt{average\_grade.sh} script. The file should be able to run all the input files (based on a special pattern) from the \texttt{Input\_files} folder and process them. In this project we assume all input files are \texttt{.txt} files. Here is the modified version of the \texttt{average\_grade.sh} script.
 
 
 
@@ -82,7 +82,7 @@ rm ../Output\_files/temp*  \\
 \end{singlespace}
 \end{mdframed}
 \noindent
-The package is now complete. You may put as much as students grade files in the \texttt{Input\_files} folder and get the results at the \texttt{Output\_files} folder. The \texttt{Final\_grade.txt} file for five students could be similar to the following:
+The package is now complete. You may put as many students' grade files in the \texttt{Input\_files} folder and get the results at the \texttt{Output\_files} folder. The \texttt{Final\_grade.txt} file for five students could be similar to the following:
 
 \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
 \begin{singlespace}
@@ -99,6 +99,6 @@ Rob.txt  \phantom{x}\hspace{3ex}     Number of grades:  22  Average score:  3.33
 \end{singlespace}
 \end{mdframed}
 \noindent
-The package process the data properly. However, there is a potential problem. If some of data are not as what we assumed, we will never be informed about them. In the next step, we modify the code to be able to report the potential problems in data.\\
+The package processes the data properly. However, there is a potential problem. If some data is not as what we assumed, we will never be informed about it. In the next step, we modify the code to be able to report the potential problems in the data.\\
 
 

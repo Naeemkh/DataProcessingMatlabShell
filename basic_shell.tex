@@ -1,6 +1,6 @@
 \section{Basic Shell Commands}
 
-Here is the list of important Shell commands for the project. You may need other commands depending on the complication of your project. There are many resources to learn how to write a shell scripts. \\
+Here is the list of important shell commands for the project. You may need other commands, this depends on the complication of your project. \\
 
 
 \begin{table}[h]
@@ -8,23 +8,23 @@ Here is the list of important Shell commands for the project. You may need other
 \begin{tabular}{ m{2cm}  m{12cm} }
 
 \hline
- \textbf{Command}          &  \textbf{Description}    \\ 
+ \textbf{Command}          &  \textbf{Description}\\ 
 \hline
- \textbf{mkdir}          & make a directory.  \\ 
- \textbf{ls}                & list directory contents.  \\ 
- \textbf{cd}               & change the directory.\\
- \textbf{pwd}            & return working directory name. \\
- \textbf{cp}               & copy files. \\ 
- \textbf{mv}              & move files. \\ 
- \textbf{rm}               & remove directory entries. \\ 
- \textbf{cat}              & concatenate and print files. \\    
- \textbf{head}           & display first lines of a file.\\
- \textbf{tail}              & display the last part of a file. \\
- \textbf{grep}            & file pattern searcher. \\   
- \textbf{echo}           & write arguments to the standard output. \\
- \textbf{paste}          & Merge corresponding or subsequent lines of files. \\
- \textbf{sed}             & stream editor. \\   
- \textbf{chmod}        & change file modes or access control lists.\\ 
+ \textbf{mkdir}          & make a directory \\ 
+ \textbf{ls}                & list directory contents \\ 
+ \textbf{cd}               & change the directory\\
+ \textbf{pwd}            & return working directory name \\
+ \textbf{cp}               & copy files \\ 
+ \textbf{mv}              & move files \\ 
+ \textbf{rm}               & remove directory entries \\ 
+ \textbf{cat}              & concatenate and print files \\    
+ \textbf{head}           & display first lines of a file\\
+ \textbf{tail}              & display the last part of a file\\
+ \textbf{grep}            & file pattern searcher\\   
+ \textbf{echo}           & write arguments to the standard output\\
+ \textbf{paste}          & Merge corresponding or subsequent lines of files\\
+ \textbf{sed}             & stream editor\\   
+ \textbf{chmod}        & change file modes or access control lists\\ 
  \hline
  \end{tabular}
 \label{tab:b_k_m_param}
@@ -32,9 +32,9 @@ Here is the list of important Shell commands for the project. You may need other
 
 \noindent
 The basic shell commands are simple and easy to use. The beauty of the shell script is allowing the user to combine the commands together for complicated 
-processeses. Combining commands or passing data between commands happens by understanding the concept of "pipe", "standard input", and "standard output". Generally, all commands print out some results into the screen. Standard input is the source of input data which can come from the keyboard, a file, or a standard output of another program. Sometimes, instead of obtaining the input from the keyboard or from a file, a program can use the output of another program as its input. This is accomplished through using of a "pipe". The vertical line $"\vert"$  is what is known as pipe. \\
+processes. Combining commands or passing data between commands happens by understanding the concept of "pipe, standard input," and "standard output." Generally, all commands print out some results into the screen. Standard input is the source of input data which can come from the keyboard, a file, or a standard output of another program. Sometimes, instead of obtaining the input from the keyboard or from a file, a program can use the output of another program as its input. This is accomplished through the use of a "pipe." The vertical line $"\vert"$  is what is known as pipe. \\
 \noindent
-Here is an example of using the pipe ($\vert$) to pass data among three different commands. The example is related to seismic data. Many seismic data comes with a header. Generally, the header is a summary information about the data (e.g. Length, station location, components, ...). Here is the part of data from Southern California Earthquake Data Center at Caltech. The data format is COSMOS V1. The time increment of the data is indicated by "dt=" and it is located at the end of the line. \\
+Here is an example of using the pipe ($\vert$) to pass data among three different commands. The example is related to seismic data. Much of seismic data comes with a header. Generally, the header is a summary of information about the data (e.g. length, station location, components, ...). Following is the part of data from Southern California Earthquake Data Center at Caltech. The data format is COSMOS V1. The time increment of the data is indicated by "dt=" and it is located at the end of the line. \\
 
 
 

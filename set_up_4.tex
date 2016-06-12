@@ -1,7 +1,7 @@
 \noindent
 \textbf{Step 4:} Modifying the Matlab code to read and write from/into \texttt{Output\_files} folder.\\
 \noindent
-Since we are in the \texttt{Functions\_scripts} folder, the \texttt{pwd} prints out the working directory ending in \texttt{Functions\_scripts}. We know, in the processing package we have also three other folders (\texttt{Input\_files,Output\_files}, and \texttt{Log\_files}). If we substitute the  \texttt{Functions\_scripts} in the path with each one of input and output folder names, we will have access to those folders. Also we want to read a file with name of \texttt{temp\_grade\_file.txt} (Shell script will generate this file, but for now, to test the program, we generate it manually). The modified \texttt{matlab\_st\_grade.m} file is according below:
+Since we are in the \texttt{Functions\_scripts} folder, the \texttt{pwd} prints out the working directory ending in \texttt{Functions\_scripts}. We know, in the processing package we have also three other folders (\texttt{Input\_files,Output\_files}, and \texttt{Log\_files}). If we substitute the  \texttt{Functions\_scripts} in the path with each one of input and output folder names, we will have access to those folders. Also we want to read a file with the name \texttt{temp\_grade\_file.txt} (Shell script will generate this file, but for now, to test the program, we generate it manually). The modified \texttt{matlab\_st\_grade.m} file is below:
 
  \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
  \begin{singlespace}
@@ -38,7 +38,7 @@ fclose(file\_id\_2);
 \end{mdframed}
 \noindent
 In order to test the code, create a file in \texttt{Output\_files} folder and name it \texttt{temp\_grade\_file.txt}. Now open the Matlab program and run the command (You can run it through shell script, too). It should create the \texttt{temp\_grade\_mat.txt} file inside the  \texttt{Output\_files} folder. \\
-Up to this point, the Matlab script is capable of reading \texttt{temp\_grade\_file.txt} file and producing \texttt{temp\_grade\_mat.txt}. Now we need to provide these files to Matlab program through shell script. We need to modify the \texttt{average\_grade.sh} to read data from \texttt{Input\_files} folder, create a temporary file (\texttt{temp\_grade\_file.txt} ) in \texttt{Output\_files} folder, run the program, and get the output file ( \texttt{temp\_grade\_mat.txt}) and put the result in the final output file. The modified \texttt{average\_grade.sh} is according below:\\
+Up to this point, the Matlab script is capable of reading \texttt{temp\_grade\_file.txt} file and producing \texttt{temp\_grade\_mat.txt}. Now we need to provide these files to Matlab program through shell script. We need to modify the \texttt{average\_grade.sh} to read data from \texttt{Input\_files} folder, create a temporary file (\texttt{temp\_grade\_file.txt} ) in \texttt{Output\_files} folder, run the program, and get the output file ( \texttt{temp\_grade\_mat.txt}) and put the result in the final output file. The modified \texttt{average\_grade.sh} is according to below:\\
 
 
  \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]

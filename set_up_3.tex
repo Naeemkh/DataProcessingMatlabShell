@@ -17,13 +17,13 @@ matlab -nodisplay -nosplash -r {\color{red}"matlab\_st\_grade,quit"}\\
 \end{mdframed}
 
 \noindent
-First line set the shell environment. At the second line we call Matlab application (make sure you exported the Matlab path as it mentioned in Matlab section), then ask the application to run  the \texttt{matlab\_st\_grade.m} script (does not need .m) and quit the program.  So far everything is set up. Here is the summary of what we have done so far. \\
+The first line sets the shell environment. The second line calls the MATLAB application (make sure you exported the Matlab path as previously mentioned in Matlab section), then tell the application to run  the \texttt{matlab\_st\_grade.m} script (does not need .m) and quit the program.  So far everything is set up. Here is the summary of what we have done so far. \\
 
 \begin{itemize}
 
 \item{We have a Matlab code which does some processing. However, it reads input and output from the same directory. \tab \ We need to modify it to read data from and write the results into \texttt{Output\_files}.}
-\item{The Matlab code reads file by exact file name. \tab \ It should read the file by the name that we assign to the file.}
-\item{We have a shell script that run the Matlab. \tab \ We need to modify the script to also provide the input file and take care of the output file of the Matlab.}
+\item{The MATLAB code reads a file by exact file name. \tab \ It should read the file by the name that we assign to the file.}
+\item{We have a shell script that runs the MATLAB. \tab \ We need to modify the script to also provide the input file for MATLAB and sets the output file for other scripts or save it.}
 \end{itemize}
 
 
