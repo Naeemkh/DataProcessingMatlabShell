@@ -1,0 +1,64 @@
+
+\textbf{step 2:} Writing the Matlab function (or script) to process one data. \\
+
+\noindent
+We need to make sure that the core function works properly (It will be hard to debug the program if the core function doesn't do what it is supposed to do). At the step one, the core function should be able to read the data from the same directory, process the data, and write the results at the same directory. Let's say we have one of the input files (\texttt{David.txt}) in \texttt{Functions\_scripts} folder (at this step we test the core function, at the final version there should not be any data file in this folder). Here is the input file content:
+
+\begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+\begin{singlespace}
+\fontsize{10pt}{1pt}
+\texttt{> head David.txt \\
+4.00 \\
+4.00 \\
+2.84 \\
+4.00 \\
+3.32 \\
+4.00 \\
+3.94 \\
+2.15 
+ }
+\end{singlespace}
+\end{mdframed}
+
+\noindent
+Now we want to write the core function. In the processing package, each Matlab program has three major sections: \textbf{Loading data}, \textbf{Processing data},  and \textbf{Saving results}. The Matlab code (\texttt{matlab\_st\_grade.m}) is according below:
+
+
+\begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+\begin{singlespace}
+\fontsize{10pt}{1pt}
+\texttt{
+\\
+\noindent
+{ \color{matlab_green} \%\% Load the input file} \\
+\\
+ student\_grade = load({\color{matlab_pink}'David.txt'}); \\
+ \\
+ {\color{matlab_green}\%\% Process data}\\
+ \\
+size\_data = size(student\_grade,1);\\
+sum\_data = sum(student\_grade); \\
+av\_data = sum\_data ./ size\_data; \\
+grade\_mat = [size\_data av\_data]; \\
+\\
+{\color{matlab_green}\%\% Save the results}\\
+\\
+ file\_id = fopen({\color{matlab_pink}'output.txt'},{\color{matlab_pink}'w'});\\
+ fprintf(file\_id,{\color{matlab_pink}'\%dt\%2.3f'},grade\_mat(1,1),grade\_mat(1,2));\\
+ fclose(file\_id);\\
+ }
+\end{singlespace}
+\end{mdframed}
+
+\noindent
+If the input file is in the same directory as the script, upon running the script, we will see the \texttt{output.txt} file at the same folder. Take a close look at the results, and make sure the program works well (It will save you a considerable amount of time if you fix the bugs at this step). This script is almost complete, however, there are three major differences between this version and the final version. At the final version:
+
+\begin{itemize}
+\item{The input file will not be in this directory.}
+\item{The output file will be written in another directory.}
+\item{The name of input and output file will be same for all data.}
+\end{itemize}
+\noindent
+In my projects, I never use Matlab to produce the final results. In that case you need to bring in the file name, which will add unnecessary complication to the project. You can ask shell script to rename, merge, or ... the final result. \\
+
+

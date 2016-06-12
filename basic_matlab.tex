@@ -1,0 +1,61 @@
+\section{MATLAB\textsuperscript{\textregistered}}
+
+MATLAB\textsuperscript{\textregistered} is short for MATrix LABoratory, and is a common high-level tool for numerical analysis in science and engineering. Writing a program in Matlab is much far from the scope of this note. However, there are some basic command that is necessary in developing the package (e.g. \texttt{load, pwd, Try Catch, strrep, sprintf, save, saveas}). Obviously, the core function could have different level of complexity based on the project. I assume you already have your script to process the data., and you want to know how to use the current functions and scripts frequently or in combination with other scripts.  
+
+
+%\begin{table}[h]
+%\begin{tabular}{ m{2cm}  m{12cm} }
+%\hline
+% \textbf{load  }          & Load a file.  \\ 
+% \textbf{pwd}            & Print working directory.  \\ 
+% \textbf{Try,catch}    & Allow you to override the default error behavior for a set of program statements.\\
+% \textbf{strrep}          & Find and replace a string. \\
+% \textbf{sprintf}         & Format data into string. \\ 
+% \textbf{save}           & Save workspace variable to file. \\ 
+% \textbf{saves}          & Save figure using specified format. \\ 
+% \hline
+% \end{tabular}
+%\label{tab:b_k_m_param}
+%\end{table}
+
+
+
+\noindent
+In unix platform, running programs which are written in C++, Python, Fortran, ... does not need any further settings. However, running MATLAB\textsuperscript{\textregistered} scripts is different from other programs. The procedure is explained well in Matlab documentation (see Matlab(Unix)).In the data processing package,  we are interested in the following options in running the Matlab application:
+
+\begin{itemize}
+  \item   \textbf{-r "command"} starts MATLAB and executes the specified MATLAB command.
+    \item \textbf{-nodisplay} do not display any X commands, and ignore the DISPLAY environment variable.
+  \item   \textbf{-nosplash} starts MATLAB but does not display the splash screen during startup. 
+\end{itemize}
+
+\noindent
+In Unix environment \texttt{matlab} script runs the Matlab functions and scripts. \texttt{matlab} is a Bourne shell script that starts the MATLAB executable on UNIX\textsuperscript{\textregistered} platforms. Unix shell needs to have access to the \texttt{matlab} script to run the application. On Apple Macintosh platforms, the \texttt{matlab} script is located inside the MATLAB application package. For example in my computer \texttt{matlab}  is located inside the following path:\\
+ 
+\begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+
+\fontsize{10pt}{1pt}
+\texttt{/Applications/MATLAB\_R2013b.app/bin}
+\end{mdframed}
+
+\noindent
+You need to add the path, to the current path to be able to run the \texttt{matlab} script. Run the following command in terminal to export the path of \texttt{matlab} script path to the current path:
+
+\begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+\fontsize{10pt}{1pt}
+\texttt{export PATH=/Applications/MATLAB\_R2013b.app/bin:\$PATH}
+\end{mdframed}
+
+
+\noindent
+Every processing package needs at least one shell script (.sh file) to call a Matlab codes. The main tasks of this script are:
+
+\begin{itemize} 
+  \item   \textbf{Preparing the data as an input for Matlab:} read the data from input folder, change the format if it is necessary (e.g. remove the header), and rename the file (Matlab will load files with specific name.)
+    \item \textbf{Running the Matlab code:} now that we know the input data is ready, the script will run the code.
+  \item  \textbf{Processing the Matlab code results:} Matlab will write the results in right place with a specific name. Shell script gets the file and rename it and do other processing or simply save it.
+
+\end{itemize}
+
+\noindent
+At the next section, we develop a data processing package in six easy steps. The main subject of the following example is understanding how to handle the input and output data and learning how to work with path. The files of the example package are attached to this document. However, it is strongly recommended to generate the files step by step to learn the developing and testing the data processing package for other projects.

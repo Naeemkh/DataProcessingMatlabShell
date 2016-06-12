@@ -1,0 +1,188 @@
+\textbf{Step 6:} Reporting warnings and producing run summary\\
+\noindent
+Let's say in this example, which we are finding the average grade, and grades supposedly should be 4 or less, mistakenly grade of one course recoded as 4.5, or we have negative grades, or the format of the data is not what we expected. In these cases, we need to make sure that, the program report the files with problems. These warning reports goes to the \texttt{Log\_files} folder. In general, we can consider following steps to make sure about the warnings:\\
+
+\begin{itemize}
+
+\item{Define a flag for a problem. For example, if the data loads properly and does not have any problem, use \textbf{0}, if the data is not in format and Matlab can not load it, use \textbf{1}, if it has a grade greater than 4 use \textbf{2}, in the case of negative grade use \textbf{3}, and if we have both out of range grades use \textbf{5} }.
+\item{Save the flag in a file (for example \texttt{temp\_status\_file.txt})}
+\item{Load the flag in the shell script and prepare the report based on the flag type.}
+
+\end{itemize}
+
+\noindent
+We start with the Matlab script. We need to define the conditions and save the results. Here is the modified Matlab code (\texttt{matlab\_st\_grade.m}).\\
+\\
+
+ \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+ \begin{singlespace}
+ \fontsize{10pt}{1pt}
+ \texttt{
+\\
+{ \color{matlab_green}\%\% Load data}\\
+{ \color{matlab_green}\% Load the input file}\\
+\\
+path1=pwd;\\
+path1 = strrep(path1,'Functions\_scripts','Output\_files'); \\
+file1='/temp\_grade\_file.txt';\\
+cfile1 = [path1 file1];\\
+\\
+\\
+{\color{for_blue}try}\\
+\phantom{x}\hspace{5ex} student\_grade = load(cfile1);\\
+\phantom{x}\hspace{5ex} student\_grade = student\_grade(:);\\
+\phantom{x}\hspace{5ex} status\_temp = 0;\\
+{\color{for_blue}catch}\\
+\phantom{x}\hspace{5ex} status\_temp = 1;\\
+{\color{for_blue}end}\\
+\\
+{\color{for_blue}if} status\_temp == 0\\
+\\
+\noindent    
+\phantom{x}\hspace{5ex} {\color{matlab_green}\% control for numbers bigger than 4.}\\
+\phantom{x}\hspace{5ex} {\color{for_blue}if} any(student\_grade >4) == 1\\ 
+\phantom{x}\hspace{10ex} status\_temp = 2;\\
+\phantom{x}\hspace{5ex}{\color{for_blue}\  end}\\
+\\ 
+\noindent
+\phantom{x}\hspace{5ex} {\color{matlab_green}\% control for negative numbers.}\\
+\phantom{x}\hspace{5ex} {\color{for_blue}if} any(student\_grade < 0) == 1\\ 
+\phantom{x}\hspace{10ex} status\_temp = status\_temp + 3;\\
+\phantom{x}\hspace{5ex} {\color{for_blue}end}\\
+{\color{for_blue}end}\\
+\\
+{\color{matlab_green}\% Write the results into a file.}\\
+status\_file\_name = sprintf({\color{matlab_pink}'\%s\%s'},path2,{\color{matlab_pink}'/temp\_status\_file.txt'});\\
+file\_id = fopen(status\_file\_name,{\color{matlab_pink}'w'});\\
+fprintf(file\_id,{\color{matlab_pink}'\%d'},status\_temp);\\
+fclose(file\_id);\\
+\\
+{\color{for_blue}if} status\_temp $\sim$= 0\\
+\phantom{x}\hspace{5ex} {\color{for_blue}break};\\
+{\color{for_blue}end}\\
+\\
+{ \color{matlab_green}\%\% Process data}\\
+\\
+size\_data = size(student\_grade,1);\\
+sum\_data = sum(student\_grade);\\
+av\_data = sum\_data ./ size\_data;\\
+grade\_mat = [size\_data av\_data];\\
+\\
+{ \color{matlab_green}\%\% Save the results}\\
+\\
+{ \color{matlab_green}\%write the results in to the file.} \\
+path2 = strrep(path1,{\color{matlab_pink}'/Functions\_scripts'},{\color{matlab_pink}'/Output\_files'});\\ 
+file2 ={\color{matlab_pink}'/temp\_grade\_mat.txt'};\\
+cfile2 = [path2 file2];\\
+\\
+file\_id\_2 = fopen(cfile2,'w');\\
+fprintf(file\_id\_2,{\color{matlab_pink}'\%d\textbackslash t\%2.3f'},grade\_mat(1,1),grade\_mat(1,2));\\
+fclose(file\_id\_2);
+}
+\end{singlespace}
+\end{mdframed}
+\noindent
+Now we have another temporary file (\texttt{temp\_status\_file.txt}) which shows the status of the file. We need to load this file into the shell script and create a report based on the flag. Here is the modified version of the \texttt{average\_grade.sh} 
+
+
+
+
+
+
+\begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+\begin{singlespace}
+\fontsize{10pt}{1pt}
+\texttt{
+\\
+{ \color{matlab_green} \#!/bin/sh}\\
+{ \color{matlab_green} \# This function call the Matlab script to take the average of students grades.}\\
+{ \color{matlab_green} \# results will be at the output\_files folder}\\
+\\
+{ \color{matlab_green} \# go in to the first variable after the ./xx.sh command.}\\
+{ \color{matlab_green} \# In this case is ../Input\_files.}\\
+\\
+cd \$1\\
+\\
+{\color{for_pink}for} i {\color{for_pink}in} \$(ls *.txt)\\
+\\
+{\color{for_pink}do}\\
+\\
+current\_path={\color{red}`pwd`}\\
+script\_path={\color{red}`echo \$current\_path| sed -e 's/Input\_files/Functions\_scripts/g'`}\\
+\\
+cat \$my\_file > ../Output/temp\_grade\_file.txt\\
+\\
+matlab -nodisplay -nosplash -r   \textbackslash \\
+{\color{red}"try,run \$script\_path/matlab\_st\_grade\_temp,catch,end,quit"}\\
+\\
+status\_mode={\color{red}`cat ../Output/temp\_status\_file.txt |awk '{print \$1}'`}\\
+\\
+{\color{for_pink}case} \$status\_mode {\color{for_pink}in}\\
+0) status\_report={\color{red}`echo Processed successfully.`};;\\
+1) status\_report={\color{red}`echo Unable to load.`};;\\
+2) status\_report={\color{red}`echo There is at least one grade greater than 4.`};;\\
+3) status\_report={\color{red}`echo There is at least one negative grade.`};;\\
+5) status\_report={\color{red}`echo There are out of range grades.`};;\\
+{\color{for_pink}esac}\\
+\\
+\\
+{\color{for_pink}if} (( \$status\_mode > 0 )); {\color{for_pink}then}\\
+\\
+echo {\color{red}'File '} \$i \$status\_report >>  ../Log\_files/grade\_run\_status.txt\\
+\\
+{\color{for_pink}else}\\
+\\
+echo {\color{red}'File '} \$i \$status\_report >>  ../Log\_files/grade\_run\_status.txt\\
+number\_of\_grades={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '{print \$1}'`}\\
+average={\color{red}`cat ../Output/temp\_grade\_mat.txt | awk '{print \$2}'`}\\
+echo \$i {\color{red}'Number of grades:'}  \$number\_of\_grades \textbackslash \\
+\phantom{x}\hspace{14ex} {\color{red}'Average score:'} \  \$average >> ../Output/Final\_grade.txt \\
+\\
+{\color{for_pink}fi}\\
+\\
+{\color{for_pink}done}\\
+\\
+rm ../Output\_files/temp*  \\  
+\\
+{ \color{matlab_green} \# -----------------------------------------------------}\\
+{ \color{matlab_green} \# ------- run summary file ---------}\\
+\\
+date\_t={\color{red}`date`}\\
+user={\color{red}"\$USER"}\\
+\\
+echo  \$user {\color{red}'Run the program on'}  \$date\_t  >> ../Log\_files/run\_summary.txt\\
+ }
+\end{singlespace}
+\end{mdframed}
+\noindent
+For example, the \texttt{grade\_run\_status.txt}  from running the package for some input file could be as following:\\
+
+\begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+\begin{singlespace}
+\fontsize{10pt}{1pt}
+\texttt{
+File  Amy.txt Procecessed successfully.\\
+File  Andy.txt There are out of range grades.\\
+File  David.txt Procecessed successfully.\\
+File  John.txt There is at least one negative grade.\\
+File  Matt.txt Procecessed successfully.\\
+File  Philip.txt There is at least one grade greater than 4.\\
+File  Rob.txt Unable to load.\\
+\\
+}
+\end{singlespace}
+\end{mdframed}
+\noindent
+The summary of the run could be a good place to give a short report about the run for your future reference, for example, those parameters that you change in each run.
+For this example, I just print out the user and time of running the processing package. Here is an example of the \texttt{run\_summary.txt} for the processing package:
+
+\begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+\fontsize{10pt}{1pt}
+\texttt{
+\\
+naeem ran the program on Mon Jun 6 211:20:40 CDT 2016
+\\
+}
+\end{mdframed}
+
+

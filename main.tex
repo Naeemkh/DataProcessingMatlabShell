@@ -1,6 +1,6 @@
 
 % Document Settings
-\documentclass[a4paper,titlepage]{article}
+\documentclass[12pt,a4paper,titlepage]{article}
 
 
 
@@ -8,8 +8,21 @@
 % Packages
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage[margin=3cm]{geometry}
+\usepackage[margin=2.5cm]{geometry}
 \usepackage{array}
+\usepackage{keystroke}
+\usepackage{menukeys} 
+\usepackage{xcolor}
+\usepackage{setspace}
+\linespread{1.2}
+
+\usepackage[framemethod=tikz]{mdframed}
+
+% define customs color
+\definecolor{matlab_green}{rgb}{0.4,0.64,0.34}
+\definecolor{for_pink}{rgb}{1,0.08,0.58}
+\definecolor{for_blue}{rgb}{0,0,1}
+\definecolor{matlab_pink}{rgb}{0.79,0.29,0.79}
 
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash\hspace{0pt}}m{#1}}

@@ -1,0 +1,104 @@
+\textbf{Step 5:} Modifying the  \texttt{average\_grade.sh} script to read all data in the \texttt{input\_files} folder \\
+\\
+\noindent
+In simple programs, the \texttt{run.sh} file, commonly run another script in the \texttt{Functions\_scripts} folder, however, it is good to have it, since it can decrease the complexity for user. If you set up the \texttt{run.sh} properly, the user will only need to execute the run.sh file, without getting too much involve in details about the program. For this project the \texttt{run.sh} file is according below:\\
+
+ \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+ \begin{singlespace}
+ \fontsize{10pt}{1pt}
+\texttt{
+\\
+\noindent
+{ \color{matlab_green}  \#!/bin/sh}\\
+{ \color{matlab_green}  \# Program Name: Students Final Grade}\\
+{ \color{matlab_green}  \# Written by: Naeem Khoshnevis}\\
+{ \color{matlab_green}  \# Last update: Jun 5, 2016}\\
+\\
+\\
+{ \color{matlab_green} \# ----------------------------------------------------------------} \\
+{ \color{matlab_green} \# --------------------- Input files format -----------------------} \\
+{ \color{matlab_green} \# student.txt:} \\
+{ \color{matlab_green} \# 3.5} \\
+{ \color{matlab_green} \# 4} \\
+{ \color{matlab_green} \# 3.2} \\
+{ \color{matlab_green} \# .} \\
+\\
+\\
+{ \color{matlab_green} \# ----------------------------------------------------------------} \\
+{ \color{matlab_green} \# --------------------- Change the directory ---------------------} \\
+\\
+cd \texttt{Functions\_scripts}\\
+\\
+{ \color{matlab_green} \# ----------------------------------------------------------------} \\
+{ \color{matlab_green} \# --------------------- Run the program --------------------------} \\
+\\
+./average\_grade.sh ../Input\_files\\
+ }
+ \end{singlespace}
+\end{mdframed}
+\noindent
+We set up the \texttt{run.sh} file. You can put as much as details about the program (as comments) at this file. Now we need to modify the \texttt{average\_grade.sh} script. The file should be able to run all the input files (based on a special pattern) from the \texttt{Input\_files} folder and process them. In this project we assume all input files are \texttt{.txt} files. Here is the modified version of the \texttt{average\_grade.sh} script.
+
+
+
+
+
+ 
+\begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+\begin{singlespace}
+\fontsize{10pt}{1pt}
+\texttt{
+\\
+{ \color{matlab_green} \#!/bin/sh}\\
+{ \color{matlab_green} \# This function call the Matlab script to take the average of students grades.}\\
+{ \color{matlab_green} \# results will be at the output\_files folder}\\
+\\
+{ \color{matlab_green} \# go in to the first variable after the ./xx.sh command.}\\
+{ \color{matlab_green} \# In this case is ../Inpute\_files.}\\
+\\
+cd \$1\\
+\\
+{\color{for_pink}for} i {\color{for_pink}in} \$(ls *.txt)\\
+\\
+{\color{for_pink}do}\\
+\\
+current\_path={\color{red}`pwd`}\\
+script\_path={\color{red}`echo \$current\_path| sed -e 's/Input\_files/Functions\_scripts/g'`}\\
+\\
+cat \$my\_file > ../Output/temp\_grade\_file.txt\\
+\\
+matlab -nodisplay -nosplash -r   \textbackslash \\
+{\color{red}"try,run \$script\_path/matlab\_st\_grade\_temp,catch,end,quit"}\\
+\\
+number\_of\_grades={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '{print \$1}'`}\\
+average={\color{red}`cat ../Output/temp\_grade\_mat.txt | awk '{print \$2}'`}\\
+echo \$my\_file {\color{red}'Number of grades:'}  \$number\_of\_grades \textbackslash \\
+\phantom{x}\hspace{14ex} {\color{red}'Average score:'} \  \$average >> ../Output/Final\_grade.txt \\
+\\
+{\color{for_pink}done}\\
+\\
+rm ../Output\_files/temp*  \\  
+ }
+\end{singlespace}
+\end{mdframed}
+\noindent
+The package is now complete. You may put as much as students grade files in the \texttt{Input\_files} folder and get the results at the \texttt{Output\_files} folder. The \texttt{Final\_grade.txt} file for five students could be similar to the following:
+
+\begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+\begin{singlespace}
+\fontsize{10pt}{1pt}
+\texttt{
+\\
+> cat Final\_grade.txt \\
+Amy.txt \phantom{x}\hspace{3ex}     Number of grades:  31  Average score:  3.306 \\
+David.txt \phantom{x}\hspace{1ex}   Number of grades:  19  Average score:  3.387 \\
+John.txt \phantom{x}\hspace{2ex}    Number of grades:  28  Average score:  3.408 \\
+Matt.txt \phantom{x}\hspace{2ex}    Number of grades:  22  Average score:  3.334 \\
+Rob.txt  \phantom{x}\hspace{3ex}     Number of grades:  22  Average score:  3.334 \\
+ }
+\end{singlespace}
+\end{mdframed}
+\noindent
+The package process the data properly. However, there is a potential problem. If some of data are not as what we assumed, we will never be informed about them. In the next step, we modify the code to be able to report the potential problems in data.\\
+
+

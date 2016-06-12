@@ -1,0 +1,80 @@
+\noindent
+\textbf{Step 4:} Modifying the Matlab code to read and write from/into \texttt{Output\_files} folder.\\
+\noindent
+Since we are in the \texttt{Functions\_scripts} folder, the \texttt{pwd} prints out the working directory ending in \texttt{Functions\_scripts}. We know, in the processing package we have also three other folders (\texttt{Input\_files,Output\_files}, and \texttt{Log\_files}). If we substitute the  \texttt{Functions\_scripts} in the path with each one of input and output folder names, we will have access to those folders. Also we want to read a file with name of \texttt{temp\_grade\_file.txt} (Shell script will generate this file, but for now, to test the program, we generate it manually). The modified \texttt{matlab\_st\_grade.m} file is according below:
+
+ \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+ \begin{singlespace}
+ \fontsize{10pt}{1pt}
+ \texttt{
+{ \color{matlab_green}\%\% Load data}\\
+{ \color{matlab_green}\% Load the input file}\\
+path1=pwd;\\
+path1 = strrep(path1,{\color{matlab_pink}'Functions\_scripts'},{\color{matlab_pink}'Output\_files'}); \\
+file1={\color{matlab_pink}'/temp\_grade\_file.txt'};\\
+cfile1 = [path1 file1];\\
+\\
+student\_grade = load(cfile1);\\
+\\
+{ \color{matlab_green}\%\% Process data}\\
+\\
+size\_data = size(student\_grade,1);\\
+sum\_data = sum(student\_grade);\\
+av\_data = sum\_data ./ size\_data;\\
+grade\_mat = [size\_data av\_data];\\
+\\
+{ \color{matlab_green}\%\% Save the results}\\
+\\
+{ \color{matlab_green}\%write the results in to the file.} \\
+path2 = strrep(path1,{\color{matlab_pink}'/Functions\_scripts'},{\color{matlab_pink}'/Output\_files'});\\ 
+file2 = {\color{matlab_pink}'/temp\_grade\_mat.txt'};\\
+cfile2 = [path2 file2];\\
+\\
+file\_id\_2 = fopen(cfile2,{\color{matlab_pink}'w'});\\
+fprintf(file\_id\_2,{\color{matlab_pink}'\%d\textbackslash t\%2.3f'},grade\_mat(1,1),grade\_mat(1,2));\\
+fclose(file\_id\_2);
+}
+\end{singlespace}
+\end{mdframed}
+\noindent
+In order to test the code, create a file in \texttt{Output\_files} folder and name it \texttt{temp\_grade\_file.txt}. Now open the Matlab program and run the command (You can run it through shell script, too). It should create the \texttt{temp\_grade\_mat.txt} file inside the  \texttt{Output\_files} folder. \\
+Up to this point, the Matlab script is capable of reading \texttt{temp\_grade\_file.txt} file and producing \texttt{temp\_grade\_mat.txt}. Now we need to provide these files to Matlab program through shell script. We need to modify the \texttt{average\_grade.sh} to read data from \texttt{Input\_files} folder, create a temporary file (\texttt{temp\_grade\_file.txt} ) in \texttt{Output\_files} folder, run the program, and get the output file ( \texttt{temp\_grade\_mat.txt}) and put the result in the final output file. The modified \texttt{average\_grade.sh} is according below:\\
+
+
+ \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
+ \begin{singlespace}
+ \fontsize{10pt}{1pt}
+\texttt{
+\noindent
+{ \color{matlab_green} \#!/bin/sh} \\
+my\_file=David.txt\\
+\\
+cd ../Input\_files\\ 
+\\
+current\_path={\color{red}`pwd`}\\
+script\_path={\color{red}`echo \$current\_path| sed -e 's/Input\_files/ Functions\_scripts/g'`}\\
+\\
+cat \$my\_file > ../Output/temp\_grade\_file.txt\\
+\\
+matlab -nodisplay -nosplash -r   \textbackslash \\
+{\color{red}"try,run \$script\_path/matlab\_st\_grade\_temp,catch,end,quit"}\\
+\\
+number\_of\_grades={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '{print \$1}'`}\\
+average={\color{red}`cat ../Output/temp\_grade\_mat.txt | awk '{print \$2}'`}\\
+echo \$my\_file {\color{red}'Number of grades:'}  \$number\_of\_grades \textbackslash \\
+\phantom{x}\hspace{14ex} {\color{red}'Average score:'} \  \$average >> ../Output/Final\_grade.txt
+ }
+ \end{singlespace}
+\end{mdframed}
+\noindent
+Make sure you have the \texttt{David.txt} file in \texttt{Input\_files} folder. Go to the \texttt{Functions\_scripts} folder and run the \texttt{average\_grade.sh}.  First we define the \texttt{my\_file} name variable and switch the path to \texttt{Input\_files} folder. Being in the \texttt{Input\_files} folder, we retrieve the current directory path and generate the \texttt{Functions\_scripts} folder's path. Using \texttt{cat} command we generate a \texttt{temp\_grade\_file.txt} inside the \texttt{Output\_files} folder. We run the Matlab code (Note that we are using run command, because the script path is not in the current Matlab path) and extract the number of grades and average values from the result. Using \texttt{echo} command, we write the results into the \texttt{Final\_grade.txt} file. Here we used "\texttt{>>}" symbol to append the value. \\
+\\
+Now we have a programming package with the following characteristics:
+
+\begin{itemize}
+\item{We have a Matlab code which reads data from \texttt{Output\_files} folder and generates results there.}
+\item{We have a shell script that can generate an input file for the Matlab script, run the Matlab script, and process the results. It seems good. However, that shell script is good for one file, where as we want to create a processing package to process as much file as we want. At the next step, we will modify the  \texttt{average\_grade.sh} script to take care of numerous files. }
+\end{itemize}
+
+
+
