@@ -1,17 +1,17 @@
-\textbf{Step 6:} Reporting warnings and producing run summary\\
+\textbf{Step 6:} Reporting warnings and producing run summary\\ \\
 \noindent
 Let's say in this example, which we are finding the average grade, and grades supposedly should be 4 or less, mistakenly grade of one course recoded as 4.5, or we have negative grades, or the format of the data is not what we expected. In these cases, we need to make sure that, the program report the files with problems. These warning reports goes to the \texttt{Log\_files} folder. In general, we can consider following steps to make sure about the warnings:\\
 
 \begin{itemize}
 
-\item{Define a flag for a problem. For example, if the data loads properly and does not have any problem, use \textbf{0}, if the data is not in format and Matlab can not load it, use \textbf{1}, if it has a grade greater than 4 use \textbf{2}, in the case of negative grade use \textbf{3}, and if we have both out of range grades use \textbf{5} }.
+\item{Define a flag for a problem. For example, if the data loads properly and does not have any problem, use \textbf{0}, if the data is not in format and MATLAB can not load it, use \textbf{1}, if it has a grade greater than 4 use \textbf{2}, in the case of negative grade use \textbf{3}, and if we have both out of range grades use \textbf{5} }.
 \item{Save the flag in a file (for example \texttt{temp\_status\_file.txt})}
 \item{Load the flag in the shell script and prepare the report based on the flag type.}
 
 \end{itemize}
 
 \noindent
-We start with the Matlab script. We need to define the conditions and save the results. Here is the modified Matlab code (\texttt{matlab\_st\_grade.m}).\\
+We start with the MATLAB script. We need to define the conditions and save the results. Here is the modified MATLAB code (\texttt{matlab\_st\_grade.m}).\\
 \\
 
  \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
@@ -81,13 +81,10 @@ fclose(file\_id\_2);
 }
 \end{singlespace}
 \end{mdframed}
+\vspace{5mm}
 \noindent
 Now we have another temporary file (\texttt{temp\_status\_file.txt}) which shows the status of the file. We need to load this file into the shell script and create a report based on the flag. Here is the modified version of the \texttt{average\_grade.sh} 
-
-
-
-
-
+\vspace{5mm}
 
 \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
 \begin{singlespace}
@@ -95,7 +92,7 @@ Now we have another temporary file (\texttt{temp\_status\_file.txt}) which shows
 \texttt{
 \\
 { \color{matlab_green} \#!/bin/sh}\\
-{ \color{matlab_green} \# This function call the Matlab script to take the average of students grades.}\\
+{ \color{matlab_green} \# This function call the MATLAB script to take the average of students grades.}\\
 { \color{matlab_green} \# results will be at the output\_files folder}\\
 \\
 { \color{matlab_green} \# go in to the first variable after the ./xx.sh command.}\\
@@ -154,6 +151,7 @@ echo  \$user {\color{red}'Run the program on'}  \$date\_t  >> ../Log\_files/run\
  }
 \end{singlespace}
 \end{mdframed}
+\vspace{5mm}
 \noindent
 For example, the \texttt{grade\_run\_status.txt}  from running the package for some input file could be as following:\\
 
@@ -161,14 +159,14 @@ For example, the \texttt{grade\_run\_status.txt}  from running the package for s
 \begin{singlespace}
 \fontsize{10pt}{1pt}
 \texttt{
+\noindent
 File  Amy.txt Procecessed successfully.\\
 File  Andy.txt There are out of range grades.\\
 File  David.txt Procecessed successfully.\\
 File  John.txt There is at least one negative grade.\\
 File  Matt.txt Procecessed successfully.\\
 File  Philip.txt There is at least one grade greater than 4.\\
-File  Rob.txt Unable to load.\\
-\\
+File  Rob.txt Unable to load.
 }
 \end{singlespace}
 \end{mdframed}

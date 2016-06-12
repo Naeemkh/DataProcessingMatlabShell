@@ -1,9 +1,9 @@
 \section{MATLAB\textsuperscript{\textregistered}}
 
-MATLAB\textsuperscript{\textregistered} is short for MATrix LABoratory, and is a common high-level tool for numerical analysis in science and engineering. Writing a program in Matlab is much farther from the scope of this note. However, there are some basic command that is necessary in developing the package (e.g. \texttt{load, pwd, Try Catch, strrep, sprintf, save, saveas}). Obviously, the core function could have a different level of complexity based on the project. Assuming you already have your script to process the data, you will want to know how to use the current functions and scripts frequently or in combination with other scripts.  
+MATLAB\textsuperscript{\textregistered} is short for MATrix LABoratory, and is a common high-level tool for numerical analysis in science and engineering. Writing a program in MATLAB is much farther from the scope of this note. However, there are some basic command that is necessary in developing the package (e.g. \texttt{load, pwd, Try Catch, strrep, sprintf, save, saveas}). Obviously, the core function could have a different level of complexity based on the project. Assuming you already have your script to process the data, you will want to know how to use the current functions and scripts frequently or in combination with other scripts.  
 
 \noindent
-In unix, running programs which are written in C++, Python, Fortran, ... does not need any further settings. However, running MATLAB scripts is different from other programs. The procedure is explained well in Matlab documentation (see Matlab(Unix)).In the data processing package,  we are interested in the following options in running the Matlab application:
+In unix, running programs which are written in C++, Python, Fortran, ... does not need any further settings. However, running MATLAB scripts is different from other programs. The procedure is explained well in MATLAB documentation (see MATLAB(Unix)).In the data processing package,  we are interested in the following options in running the MATLAB application:
 
 \begin{itemize}
   \item   \textbf{-r "command"} starts MATLAB and executes the specified MATLAB command
@@ -12,7 +12,7 @@ In unix, running programs which are written in C++, Python, Fortran, ... does no
 \end{itemize}
 
 \noindent
-In Unix environment \texttt{matlab} script runs the Matlab functions and scripts. \texttt{matlab} is a Bourne shell script that starts the MATLAB executable on UNIX\textsuperscript{\textregistered} platforms. Unix shell needs to have access to the \texttt{matlab} script to run the application. On Apple Macintosh platforms, the \texttt{matlab} script is located inside the MATLAB application package. For example in my computer \texttt{matlab}  is located inside the following path:\\
+In Unix environment \texttt{matlab} script runs the MATLAB functions and scripts. \texttt{matlab} is a Bourne shell script that starts the MATLAB executable on UNIX\textsuperscript{\textregistered} platforms. Unix shell needs to have access to the \texttt{matlab} script to run the application. On Apple Macintosh platforms, the \texttt{matlab} script is located inside the MATLAB application package. For example in my computer \texttt{matlab}  is located inside the following path:\\
  
 \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
 
@@ -30,12 +30,12 @@ You need to add the path, to the current path to be able to run the \texttt{matl
 
 
 \noindent
-Every processing package needs at least one shell script (.sh file) to call Matlab codes. The main tasks of this script are:
+Every processing package needs at least one shell script (.sh file) to call MATLAB codes. The main tasks of this script are:
 
 \begin{itemize} 
-  \item   \textbf{Preparing the data as an input for Matlab:} read the data from input folder, change the format if it is necessary (e.g. remove the header), and rename the file (Matlab will load files with specific name.)
-    \item \textbf{Running the Matlab code:} now that we know the input data is ready, the script will run the code.
-  \item  \textbf{Processing the Matlab code results:} Matlab will write the results in the right place with a specific name. Shell script gets the file and renames it and will do other processing or will simply save it.
+  \item   \textbf{Preparing the data as an input for MATLAB:} read the data from input folder, change the format if it is necessary (e.g. remove the header), and rename the file (MATLAB will load files with specific name.)
+    \item \textbf{Running the MATLAB code:} now that we know the input data is ready, the script will run the code.
+  \item  \textbf{Processing the MATLAB code results:} MATLAB will write the results in the right place with a specific name. Shell script gets the file and renames it and will do other processing or will simply save it.
 
 \end{itemize}
 

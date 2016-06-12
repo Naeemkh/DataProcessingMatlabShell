@@ -36,21 +36,17 @@ cd \texttt{Functions\_scripts}\\
  }
  \end{singlespace}
 \end{mdframed}
+\vspace{5mm}
 \noindent
 We set up the \texttt{run.sh} file. You can put as many details about the program (as comments) in this file, as you want. Now we need to modify the \texttt{average\_grade.sh} script. The file should be able to run all the input files (based on a special pattern) from the \texttt{Input\_files} folder and process them. In this project we assume all input files are \texttt{.txt} files. Here is the modified version of the \texttt{average\_grade.sh} script.
-
-
-
-
-
- 
+\vspace{5mm} 
 \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
 \begin{singlespace}
 \fontsize{10pt}{1pt}
 \texttt{
 \\
 { \color{matlab_green} \#!/bin/sh}\\
-{ \color{matlab_green} \# This function call the Matlab script to take the average of students grades.}\\
+{ \color{matlab_green} \# This function call the MATLAB script to take the average of students grades.}\\
 { \color{matlab_green} \# results will be at the output\_files folder}\\
 \\
 { \color{matlab_green} \# go in to the first variable after the ./xx.sh command.}\\
@@ -81,9 +77,10 @@ rm ../Output\_files/temp*  \\
  }
 \end{singlespace}
 \end{mdframed}
+\vspace{5mm}
 \noindent
 The package is now complete. You may put as many students' grade files in the \texttt{Input\_files} folder and get the results at the \texttt{Output\_files} folder. The \texttt{Final\_grade.txt} file for five students could be similar to the following:
-
+\vspace{5mm}
 \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
 \begin{singlespace}
 \fontsize{10pt}{1pt}
