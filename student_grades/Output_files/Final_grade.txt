@@ -1,0 +1,3 @@
+Amy.txt Number of grades: 31 Average score: 3.306
+David.txt Number of grades: 19 Average score: 3.387
+Matt.txt Number of grades: 22 Average score: 3.334

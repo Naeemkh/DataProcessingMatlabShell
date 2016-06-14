@@ -1,7 +1,7 @@
 \textbf{Step 5:} Modifying the  \texttt{average\_grade.sh} script to read all data in the \texttt{input\_files} folder \\
 \\
 \noindent
-In simple programs, the \texttt{run.sh} file, commonly runs another script in the \texttt{Functions\_scripts} folder, however, it is good to have it, since it can decrease the complexity for user. If you set up the \texttt{run.sh} properly, the user will only need to execute the run.sh file, without getting too much involve in details about the program. For this project the \texttt{run.sh} file is according below:\\
+In simple programs, the \texttt{run.sh} file, commonly runs another script in the \texttt{Functions\_scripts} folder, however, it is good to have it, since it can decrease the complexity for user. If you set up the \texttt{run.sh} properly, the user will only need to execute the run.sh file, without getting too much involved in details about the program. For this project the \texttt{run.sh} file is according below:\\
 
  \begin{mdframed}[hidealllines=true,backgroundcolor=gray!20]
  \begin{singlespace}
@@ -61,15 +61,15 @@ cd \$1\\
 current\_path={\color{red}`pwd`}\\
 script\_path={\color{red}`echo \$current\_path| sed -e 's/Input\_files/Functions\_scripts/g'`}\\
 \\
-cat \$my\_file > ../Output/temp\_grade\_file.txt\\
+cat \$i > ../Output\_files/temp\_grade\_file.txt\\
 \\
 matlab -nodisplay -nosplash -r   \textbackslash \\
-{\color{red}"try,run \$script\_path/matlab\_st\_grade\_temp,catch,end,quit"}\\
+{\color{red}"try,run \$script\_path/matlab\_st\_grade,catch,end,quit"}\\
 \\
-number\_of\_grades={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '{print \$1}'`}\\
-average={\color{red}`cat ../Output/temp\_grade\_mat.txt | awk '{print \$2}'`}\\
-echo \$my\_file {\color{red}'Number of grades:'}  \$number\_of\_grades \textbackslash \\
-\phantom{x}\hspace{14ex} {\color{red}'Average score:'} \  \$average >> ../Output/Final\_grade.txt \\
+number\_of\_grades={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '\{print \$1\}'`}\\
+average={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '\{print \$2\}'`}\\
+echo \$i {\color{red}'Number of grades:'}  \$number\_of\_grades \textbackslash \\
+\phantom{x}\hspace{14ex} {\color{red}'Average score:'} \  \$average >> ../Output\_files/Final\_grade.txt \\
 \\
 {\color{for_pink}done}\\
 \\

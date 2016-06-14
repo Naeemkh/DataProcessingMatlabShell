@@ -7,6 +7,7 @@ Since we are in the \texttt{Functions\_scripts} folder, the \texttt{pwd} prints 
  \begin{singlespace}
  \fontsize{10pt}{1pt}
  \texttt{
+ \noindent
 { \color{matlab_green}\%\% Load data}\\
 { \color{matlab_green}\% Load the input file}\\
 path1=pwd;\\
@@ -53,15 +54,15 @@ cd ../Input\_files\\
 current\_path={\color{red}`pwd`}\\
 script\_path={\color{red}`echo \$current\_path| sed -e 's/Input\_files/ Functions\_scripts/g'`}\\
 \\
-cat \$my\_file > ../Output/temp\_grade\_file.txt\\
+cat \$my\_file > ../Output\_files/temp\_grade\_file.txt\\
 \\
 matlab -nodisplay -nosplash -r   \textbackslash \\
-{\color{red}"try,run \$script\_path/matlab\_st\_grade\_temp,catch,end,quit"}\\
+{\color{red}"try,run \$script\_path/matlab\_st\_grade,catch,end,quit"}\\
 \\
-number\_of\_grades={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '{print \$1}'`}\\
-average={\color{red}`cat ../Output/temp\_grade\_mat.txt | awk '{print \$2}'`}\\
+number\_of\_grades={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '\{print \$1\}'`}\\
+average={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '\{print \$2\}'`}\\
 echo \$my\_file {\color{red}'Number of grades:'}  \$number\_of\_grades \textbackslash \\
-\phantom{x}\hspace{14ex} {\color{red}'Average score:'} \  \$average >> ../Output/Final\_grade.txt
+\phantom{x}\hspace{14ex} {\color{red}'Average score:'} \  \$average >> ../Output\_files/Final\_grade.txt
  }
  \end{singlespace}
 \end{mdframed}

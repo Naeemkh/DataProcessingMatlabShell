@@ -23,9 +23,9 @@ We start with the MATLAB script. We need to define the conditions and save the r
 { \color{matlab_green}\% Load the input file}\\
 \\
 path1=pwd;\\
-path1 = strrep(path1,'Functions\_scripts','Output\_files'); \\
+path2 = strrep(path1,'Functions\_scripts','Output\_files'); \\
 file1='/temp\_grade\_file.txt';\\
-cfile1 = [path1 file1];\\
+cfile1 = [path2 file1];\\
 \\
 \\
 {\color{for_blue}try}\\
@@ -107,12 +107,12 @@ cd \$1\\
 current\_path={\color{red}`pwd`}\\
 script\_path={\color{red}`echo \$current\_path| sed -e 's/Input\_files/Functions\_scripts/g'`}\\
 \\
-cat \$my\_file > ../Output/temp\_grade\_file.txt\\
+cat \$i > ../Output\_files/temp\_grade\_file.txt\\
 \\
 matlab -nodisplay -nosplash -r   \textbackslash \\
-{\color{red}"try,run \$script\_path/matlab\_st\_grade\_temp,catch,end,quit"}\\
+{\color{red}"try,run \$script\_path/matlab\_st\_grade,catch,end,quit"}\\
 \\
-status\_mode={\color{red}`cat ../Output/temp\_status\_file.txt |awk '{print \$1}'`}\\
+status\_mode={\color{red}`cat ../Output\_files/temp\_status\_file.txt |awk '\{print \$1\}'`}\\
 \\
 {\color{for_pink}case} \$status\_mode {\color{for_pink}in}\\
 0) status\_report={\color{red}`echo Processed successfully.`};;\\
@@ -130,10 +130,10 @@ echo {\color{red}'File '} \$i \$status\_report >>  ../Log\_files/grade\_run\_sta
 {\color{for_pink}else}\\
 \\
 echo {\color{red}'File '} \$i \$status\_report >>  ../Log\_files/grade\_run\_status.txt\\
-number\_of\_grades={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '{print \$1}'`}\\
-average={\color{red}`cat ../Output/temp\_grade\_mat.txt | awk '{print \$2}'`}\\
+number\_of\_grades={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '\{print \$1\}'`}\\
+average={\color{red}`cat ../Output\_files/temp\_grade\_mat.txt | awk '\{print \$2\}'`}\\
 echo \$i {\color{red}'Number of grades:'}  \$number\_of\_grades \textbackslash \\
-\phantom{x}\hspace{14ex} {\color{red}'Average score:'} \  \$average >> ../Output/Final\_grade.txt \\
+\phantom{x}\hspace{14ex} {\color{red}'Average score:'} \  \$average >> ../Output\_files/Final\_grade.txt \\
 \\
 {\color{for_pink}fi}\\
 \\
@@ -147,7 +147,7 @@ rm ../Output\_files/temp*  \\
 date\_t={\color{red}`date`}\\
 user={\color{red}"\$USER"}\\
 \\
-echo  \$user {\color{red}'Run the program on'}  \$date\_t  >> ../Log\_files/run\_summary.txt\\
+echo  \$user {\color{red}'ran the program on'}  \$date\_t  >> ../Log\_files/run\_summary.txt\\
  }
 \end{singlespace}
 \end{mdframed}
